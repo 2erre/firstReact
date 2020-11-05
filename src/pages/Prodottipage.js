@@ -19,6 +19,8 @@ import { Alert } from 'react-bootstrap';
           history.push('/login')
     
         }, []);
+
+        
     
     const [listaProdotti, setListaProdotti] = useState();
 
@@ -49,6 +51,8 @@ import { Alert } from 'react-bootstrap';
         })
     }
 
+    
+
 
 
     //le quadre prevengono un loop, dicono all'istruzione che deve aggiornare lo stato solo la prima volta
@@ -57,6 +61,7 @@ return <> {listaProdotti ?
             <ProdottoComponent 
             showAddCartButton={true}
             showRemoveCartButton={false}
+            
             prodotto={prodotto} eliminaProdotto={eliminaProdotto} addCart={addCart}/>)  :
               <h1>NON ESISTE</h1> }
               
