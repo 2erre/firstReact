@@ -35,22 +35,22 @@ app.get('/prodotti', (req,res)=>{
 
  /* Servizio REST POST prodotti  */
 
- app.post('/prodotti', (req,res)=>{
+//  app.post('/prodotti', (req,res)=>{
 
-    fs.readFile(PRODUCT_DATA_FILE, (err,data)=>{
-        const listaProdotti = JSON.parse(data);
-        const nuovoProdotto = {
-            id : req.body.id,
-            titolo : req.body.titolo,
-            prezzo : req.body.prezzo
-        };
-        listaProdotti.push(nuovoProdotto);
-        fs.writeFile(PRODUCT_DATA_FILE, JSON.stringify(listaProdotti), ()=> {
-            res.json(listaProdotti);
-        });
-    });
+//     fs.readFile(PRODUCT_DATA_FILE, (err,data)=>{
+//         const listaProdotti = JSON.parse(data);
+//         const nuovoProdotto = {
+//             id : req.body.id,
+//             titolo : req.body.titolo,
+//             prezzo : req.body.prezzo
+//         };
+//         listaProdotti.push(nuovoProdotto);
+//         fs.writeFile(PRODUCT_DATA_FILE, JSON.stringify(listaProdotti), ()=> {
+//             res.json(listaProdotti);
+//         });
+//     });
 
- });
+//  });
 
  /* Servizio REST POST login utenti  */
 
@@ -175,6 +175,45 @@ app.get('/carrello', (req,res)=>{
         });
       });
     });
+
+/* Servizio REST POST prodotto (ADD) */
+
+app.post('/prodotti', (req,res)=>{
+
+    fs.readFile(PRODUCT_DATA_FILE, (err,data)=>{
+        
+        const listaProdotti = JSON.parse(data);  
+    
+        // var prodottoPresente = listaProdotti.filter(prodotto => prodotto.titolo === req.body.titolo)[0];
+    
+        // if(prodottoPresente){
+
+        //     prodottoPresente = {
+        //         ...prodottoPresente,
+        //         disponibilita: prodottoPresente.disponibilita++
+        //     };
+
+        // }else{
+
+                var nuovoProdotto = {
+                    id : req.body.id,
+                    titolo : req.body.titolo,
+                    prezzo : req.body.prezzo,
+                    
+                };
+
+                console.log(nuovoProdotto)
+                listaProdotti.push(nuovoProdotto)
+            // }
+
+                fs.writeFile(PRODUCT_DATA_FILE, JSON.stringify(listaProdotti), ()=> {       
+                    res.json(listaProdotti)
+                });
+    });
+
+ });
+
+
 
 
     app.listen(app.get('port'), ()=>{
