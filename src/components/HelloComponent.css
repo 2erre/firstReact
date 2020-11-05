@@ -1,0 +1,21 @@
+.containerHelloComponent{
+    display: flex;
+}
+
+.containerProdottoComponent{
+    display: inline-flex;
+
+}
+
+#card{
+justify-content: space-between;
+background-color: firebrick;
+}
+
+#btnElimina{
+    background-color: red; 
+    height: 50px;
+    border-radius: 10px;
+    width: 100px
+    
+}
