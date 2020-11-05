@@ -147,10 +147,31 @@ app.get('/carrello', (req,res)=>{
 
     fs.readFile(CART_DATA_FILE, (err,data)=>{
         const listaProdotti = JSON.parse(data);
-        var nuovaLista = listaProdotti.filter(prodotto => req.params.id !== prodotto.id);
 
-         fs.writeFile(CART_DATA_FILE, JSON.stringify(nuovaLista), ()=> {
-            res.json(nuovaLista);
+        var prodottoPresente = listaProdotti.filter(prodotto => prodotto.id === req.params.id)[0];
+    
+        if(prodottoPresente){
+
+            prodottoPresente = {
+                ...prodottoPresente,
+                quantita: prodottoPresente.quantita--
+            };
+
+        }else{
+
+                var nuovoProdotto = {
+                    id : undefined,
+                    titolo : undefined,
+                    prezzo : undefined,
+                   
+                };
+
+                console.log(nuovoProdotto)
+                listaProdotti.push(nuovoProdotto)
+            }
+
+         fs.writeFile(CART_DATA_FILE, JSON.stringify(listaProdotti), ()=> {
+            res.json(listaProdotti);
         });
       });
     });
