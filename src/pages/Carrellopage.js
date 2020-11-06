@@ -34,6 +34,8 @@ const {carrelloState,dispatchCart}=useCarrello();
         })
     }
 
+   
+
 
     return <> {carrelloState?.listaCarrello ?
         
@@ -42,7 +44,7 @@ const {carrelloState,dispatchCart}=useCarrello();
            <ProdottoComponent
             showRemoveCartButton={true}
             showAddCartButton={false} 
-            prodotto={prodotto}  removeCart={removeCart}   /> </>)  :
+            prodotto={prodotto}  removeCart={removeCart}    /> </>)  :
              <h1>NON ESISTE</h1> }
              </>
         

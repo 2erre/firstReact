@@ -14,13 +14,17 @@ export const ProdottoComponent = ({prodotto,eliminaProdotto,addCart,removeCart,s
          <Card.Text>Prezzo:{prodotto.prezzo}</Card.Text> </h1>
          <Card.Text>Quantita:{prodotto.quantita}</Card.Text> 
 
+    {showRemoveCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user'
+    &&<button id="btnElimina" onClick={()=>removeCart(prodotto.id)}> Rimuovi dal carrello </button>}
 
+    {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='admin'
+    &&<button id="btnRimuovi" onClick={()=>eliminaProdotto(prodotto.id)}> Elimina prodotto </button>}
 
-    <button id="btnElimina" onClick={()=>JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user'?removeCart(prodotto.id):
-    eliminaProdotto(prodotto.id)}> Elimina </button>
+    {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='admin' 
+    &&<button id="btnModifica"> Modifica Prodotto</button>}
 
-    {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='admin' &&<button id="btnModifica"> Modifica Prodotto</button>}
-    {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user' &&<button id="btnAddCart" onClick={()=>addCart(prodotto)}> Aggiungi al carrello</button>}
+    {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user' &&
+    <button id="btnAddCart" onClick={()=>addCart(prodotto)}> Aggiungi al carrello</button>}
     {/* {(showRemoveCartButton)&& JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user' &&(<button id="btnElimina" onClick={()=>removeCart(prodotto.id)}> Rimuovi dal carrello</button>)} */}
   </Card.Body>
 </Card>

@@ -3,7 +3,7 @@ const URL_BACKEND = 'http://localhost:9999';
 export const prodottiServices = {
 
     getAllProdotti,
-    //aggiungiNuovoProdotto,
+    aggiungiProdotto,
     eliminaProdotto
 };
 
@@ -22,5 +22,14 @@ function eliminaProdotto(id){
         headers: {'Content-Type':'application/json'},
     };
     return fetch(URL_BACKEND + `/prodotti/${id}`, requestOptions)
+           .then(response=>response.json()).catch(err=>console.log(err))
+};
+
+function aggiungiProdotto(){
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+    };
+    return fetch(URL_BACKEND + `/prodotti`, requestOptions)
            .then(response=>response.json()).catch(err=>console.log(err))
 };
