@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
-The project was carried out as part of an IBM Academy training at Information Systems an IBM Company in RIETI.
+The project was carried out as part of an IBM Academy training at Sistemi Informativi S.r.l an IBM Company in RIETI.
 
 The aim of the project was to create a web application able to exploit the main REST services through React.js
 
