@@ -2,7 +2,6 @@ import { LayoutPage } from "../layout/Layoutpage";
 
 const { useState, useEffect } = require("react");
 const { AggiungiprodottoComponent } = require("../components/AggiungiprodottoComponent");
-const { prodottiServices } = require("../services/prodotti.service");
 const { history } = require("../utils/history");
 
 function Aggiungiprodottipage() {
@@ -18,36 +17,38 @@ function Aggiungiprodottipage() {
   
       }, []);
 
-  //const [edit,setEdit]=useState("");
-  const [id,setId]=useState("");
-  const [titolo,setTitolo]=useState("");
-  const [prezzo,setPrezzo]=useState(""); 
-  const [listaProdotti,setListaProdotti]=useState("");
-  const [state, setState]= useState({titolo:"", prezzo:""})
+  const [prodottoState, setprodottoState]= useState({id:"",titolo:"", prezzo:""})
+  
     
-    const onChange=(e)=>{
+  const onChange=(e)=>{
 
-      setState({...state, [e.target.name]:e.target.value})
-    }
+    setprodottoState({...prodottoState, [e.target.name]:e.target.value})
+  }
 
     const pulisciInput=()=>{
-        setTitolo("")
-        setPrezzo("")
+        setprodottoState({id:"",titolo:"", prezzo:""})
+        
     }
 
-    const aggiungiProdotto=()=>{
-        var id=Math.floor(Math.random()*1000)
-        var nuovoProdotto={id:id, titolo:titolo , prezzo:prezzo}
-        setListaProdotti([...listaProdotti,nuovoProdotto])
-        pulisciInput()
     
-      }
+
+    const aggiungiProdotto=(prodotto=({titolo:prodottoState.titolo, prezzo:prodottoState.prezzo}))=>{
+      
+      console.log(prodotto.titolo)
+      console.log(prodotto.prezzo)
+      var id=Math.floor(Math.random()*1000)
+      var nuovoProdotto={id:id, titolo:prodotto.titolo , prezzo:prodotto.prezzo}
+      console.log(nuovoProdotto)
+      
+      pulisciInput()
+ 
+    }
 
 
     return(
 
         <>
-        <AggiungiprodottoComponent state={state} onChange={onChange} aggiungiProdotto={aggiungiProdotto}> </AggiungiprodottoComponent>
+        <AggiungiprodottoComponent prodottoState={prodottoState} onChange={onChange} aggiungiProdotto={aggiungiProdotto}> </AggiungiprodottoComponent>
         </>
     
     )

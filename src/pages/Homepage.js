@@ -74,6 +74,7 @@ function Homepage() {
     pulisciInput()
 
   }
+  
 /*elimina persona da lista, ristampando solo le persone con id diverso da quello da eliminare*/ 
   const eliminaPersona=(id)=>{
 

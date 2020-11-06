@@ -35,7 +35,7 @@ export const NavbarComponent =() =>{
     
     {JSON.parse(localStorage.getItem('utenteloggato'))?.success&&(<><Link to="/">Home</Link> 
     <Link to="/prodotti">Prodotti</Link>
-    <Link to="/aggiungiprodotti">Aggiungi Prodotti</Link>
+    {JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo=='admin'&&(<Link to="/aggiungiprodotti">Aggiungi Prodotti</Link>)}
     {JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo=='user'&&(<Link to="/carrello">Carrello: {carrelloState?.listaCarrello?.length}</Link>)}
     <span onClick={()=>logout()}>Logout</span></>)}
   </Navbar>
