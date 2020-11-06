@@ -25,7 +25,6 @@ export const ProdottoComponent = ({prodotto,eliminaProdotto,addCart,removeCart,s
 
     {showAddCartButton&&JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user' &&
     <button id="btnAddCart" onClick={()=>addCart(prodotto)}> Aggiungi al carrello</button>}
-    {/* {(showRemoveCartButton)&& JSON.parse(localStorage.getItem('utenteloggato'))?.ruolo==='user' &&(<button id="btnElimina" onClick={()=>removeCart(prodotto.id)}> Rimuovi dal carrello</button>)} */}
   </Card.Body>
 </Card>
 </div>

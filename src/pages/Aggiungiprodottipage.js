@@ -1,24 +1,22 @@
-import { LayoutPage } from "../layout/Layoutpage";
 
+import { LayoutPage } from "../layout/Layoutpage";
+import { prodottiServices } from "../services/prodotti.service";
 const { useState, useEffect } = require("react");
 const { AggiungiprodottoComponent } = require("../components/AggiungiprodottoComponent");
 const { history } = require("../utils/history");
 
 function Aggiungiprodottipage() {
-
-    
+   
     useEffect(()=>{
-      
-  
+        
       if(!JSON.parse(localStorage.getItem('utenteloggato'))?.success)
    
         history.push('/login')
         
-  
       }, []);
 
   const [prodottoState, setprodottoState]= useState({id:"",titolo:"", prezzo:""})
-  
+  const [listaProdotti, setlistaProdotti]= useState("")
     
   const onChange=(e)=>{
 
@@ -26,36 +24,29 @@ function Aggiungiprodottipage() {
   }
 
     const pulisciInput=()=>{
-        setprodottoState({id:"",titolo:"", prezzo:""})
+        setprodottoState({titolo:" ", prezzo:" "})
         
     }
 
-    
+     
 
-    const aggiungiProdotto=(prodotto=({titolo:prodottoState.titolo, prezzo:prodottoState.prezzo}))=>{
-      
-      console.log(prodotto.titolo)
-      console.log(prodotto.prezzo)
-      var id=Math.floor(Math.random()*1000)
-      var nuovoProdotto={id:id, titolo:prodotto.titolo , prezzo:prodotto.prezzo}
-      console.log(nuovoProdotto)
-      
+    const aggiungiProdotto=()=>{
+       
+      prodottiServices.aggiungiProdotto({titolo:prodottoState.titolo, prezzo:prodottoState.prezzo}).then((response) => {
+      setlistaProdotti(response)      
       pulisciInput()
- 
+     
+     }); 
+      
     }
-
 
     return(
 
         <>
         <AggiungiprodottoComponent prodottoState={prodottoState} onChange={onChange} aggiungiProdotto={aggiungiProdotto}> </AggiungiprodottoComponent>
-        </>
-    
+        </>    
     )
 
-    
-
     }
-
     const LayoutLogin = LayoutPage(Aggiungiprodottipage);
     export {LayoutLogin as Aggiungiprodottipage}

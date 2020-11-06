@@ -102,7 +102,6 @@ app.get('/prodotti', (req,res)=>{
     fs.readFile(CART_DATA_FILE, (err,data)=>{
         
         const listaProdotti = JSON.parse(data);  
-    
         var prodottoPresente = listaProdotti.filter(prodotto => prodotto.id === req.body.id)[0];
     
         if(prodottoPresente){
@@ -124,7 +123,6 @@ app.get('/prodotti', (req,res)=>{
                 console.log(nuovoProdotto)
                 listaProdotti.push(nuovoProdotto)
             }
-
                 fs.writeFile(CART_DATA_FILE, JSON.stringify(listaProdotti), ()=> {       
                     res.json(listaProdotti)
                 });
@@ -148,7 +146,7 @@ app.get('/carrello', (req,res)=>{
     fs.readFile(CART_DATA_FILE, (err,data)=>{
         const listaProdotti = JSON.parse(data);
 
-        var prodottoPresente = listaProdotti.filter(prodotto => prodotto.id === req.params.id)[0];
+        var prodottoPresente = listaProdotti.filter(prodotto => prodotto.id ===req.params.id)[0];
     
         if(prodottoPresente){
 
@@ -183,20 +181,9 @@ app.post('/prodotti', (req,res)=>{
     fs.readFile(PRODUCT_DATA_FILE, (err,data)=>{
         
         const listaProdotti = JSON.parse(data);  
-    
-        // var prodottoPresente = listaProdotti.filter(prodotto => prodotto.titolo === req.body.titolo)[0];
-    
-        // if(prodottoPresente){
-
-        //     prodottoPresente = {
-        //         ...prodottoPresente,
-        //         disponibilita: prodottoPresente.disponibilita++
-        //     };
-
-        // }else{
 
                 var nuovoProdotto = {
-                    id : req.body.id,
+                    id : Math.floor(Math.random()*1000),
                     titolo : req.body.titolo,
                     prezzo : req.body.prezzo,
                     
@@ -204,7 +191,7 @@ app.post('/prodotti', (req,res)=>{
 
                 console.log(nuovoProdotto)
                 listaProdotti.push(nuovoProdotto)
-            // }
+            
 
                 fs.writeFile(PRODUCT_DATA_FILE, JSON.stringify(listaProdotti), ()=> {       
                     res.json(listaProdotti)

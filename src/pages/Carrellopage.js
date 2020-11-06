@@ -34,7 +34,11 @@ const {carrelloState,dispatchCart}=useCarrello();
         })
     }
 
-   
+    const eliminaProdotto=(id)=>{
+        carrelloServices.eliminaProdotto(id).then((response) => {
+            dispatchCart(carrelloActions.setCartAction(response))
+        })
+    }
 
 
     return <> {carrelloState?.listaCarrello ?
@@ -44,7 +48,7 @@ const {carrelloState,dispatchCart}=useCarrello();
            <ProdottoComponent
             showRemoveCartButton={true}
             showAddCartButton={false} 
-            prodotto={prodotto}  removeCart={removeCart}    /> </>)  :
+            prodotto={prodotto}  removeCart={removeCart} eliminaProdotto={eliminaProdotto}   /> </>)  :
              <h1>NON ESISTE</h1> }
              </>
         
